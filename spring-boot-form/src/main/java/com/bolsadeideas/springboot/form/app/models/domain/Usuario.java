@@ -1,9 +1,30 @@
 package com.bolsadeideas.springboot.form.app.models.domain;
 
-public class Usuario {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
+public class Usuario {
+	//0-9 equivale a \\d
+	@Pattern(regexp="[0-9]{2}[.][\\d]{3}[.][\\d]{3}[-][A-Z]{1}")
+	private String identificador;
+
+	@NotEmpty(message = "El nombre no puede estar vacío")
+	private String nombre;
+
+	@NotEmpty
+	private String apellido;
+
+	@NotEmpty
+	@Size(min = 3, max = 8)
 	private String username;
+
+	@NotEmpty
 	private String password;
+
+	@NotEmpty
+	@Email(message = "Correo con formato incorrecto")
 	private String email;
 
 	public String getUsername() {
@@ -30,4 +51,29 @@ public class Usuario {
 		this.email = email;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getIdentificador() {
+		return identificador;
+	}
+
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
+	}
+
+	
 }
