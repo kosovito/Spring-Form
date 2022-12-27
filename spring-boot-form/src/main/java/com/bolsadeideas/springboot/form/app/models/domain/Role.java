@@ -2,6 +2,19 @@ package com.bolsadeideas.springboot.form.app.models.domain;
 
 public class Role {
 
+	@Override
+	public boolean equals(Object obj) {
+		if(this == obj) {
+			return true;
+		}
+		
+		if(!(obj instanceof Role)) {
+			return false;
+		}
+		Role role = (Role)obj;
+		return this.id != null && this.id.equals(role.getId());
+	}
+
 	private Integer id;
 	private String nombre;
 	private String role;

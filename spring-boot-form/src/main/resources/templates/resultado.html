@@ -19,6 +19,9 @@
 		<li th:text="${usuario.pais.id}"></li>
 		<li th:text="${usuario.pais.codigo}"></li>
 		<li th:text="${usuario.pais.nombre}"></li>
+		<li th:text="'Habilitado: ' + ${usuario.habilitar}"></li>
+		<li th:text="'Género: ' + ${usuario.genero}"></li>
+		<li th:text="'Valor oculto: ' + ${usuario.valorSecreto}"></li>
 	</ul>
 
 	<div>Roles</div>
