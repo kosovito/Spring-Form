@@ -5,6 +5,11 @@
 <title th:text="${titulo}"></title>
 </head>
 <body>
+
+<div>
+	<span th:text="'Tiempo transcurrido: '+${tiempoTranscurrido} + ' en ms'"></span>
+</div>
+
 	<h3 th:text="${titulo}"></h3>
 	<form th:action="@{/form}" th:object="${usuario}" method="post">
 
