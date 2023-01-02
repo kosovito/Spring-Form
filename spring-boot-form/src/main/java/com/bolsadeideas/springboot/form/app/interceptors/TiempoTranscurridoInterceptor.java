@@ -14,12 +14,16 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component("tiempoTranscurridoInterceptor")
 public class TiempoTranscurridoInterceptor implements HandlerInterceptor{
-	;
+	
 	private static final Logger logger = LoggerFactory.getLogger(TiempoTranscurridoInterceptor.class);
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		
+		//si usamos este if, omitimos el post, solo se aplicaría en el form get
+		if(request.getMethod().equalsIgnoreCase("post")) {
+			return true;
+		}
 		
 		if(handler instanceof HandlerMethod) {
 			HandlerMethod metodo =  (HandlerMethod) handler;
@@ -31,14 +35,19 @@ public class TiempoTranscurridoInterceptor implements HandlerInterceptor{
 		long tiempoInicio = System.currentTimeMillis();
 		request.setAttribute("tiempoInicio", tiempoInicio);
 		Random random = new Random();
-		Integer demora = random.nextInt(500);
+		Integer demora = random.nextInt(100);
 		Thread.sleep(demora);
 		return true;
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+		
+		//si usamos este if, omitimos el post, solo se aplicaría en el form get y no ejecutaria el resto
+		if(request.getMethod().equalsIgnoreCase("post")) {
+			return;
+		}
+				
 		long tiempoFin = System.currentTimeMillis();
 		long tiempoInicio = (Long)request.getAttribute("tiempoInicio");
 		long tiempoTranscurrido = tiempoFin - tiempoInicio;

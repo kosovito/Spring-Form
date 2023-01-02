@@ -7,9 +7,8 @@
 </head>
 <body>
 
-<div class="alert alert-success">
-	<span th:text="'Tiempo transcurrido: '+${tiempoTranscurrido} + ' en ms'"></span>
-</div>
+<section th:replace="~{componentes/tiempo_bootstrap :: interceptor}"></section>
+
 	<h3 th:text="${titulo}"></h3>
 	<div class="container">
 		<form th:action="@{/form}" th:object="${usuario}" method="post">
